@@ -8,23 +8,27 @@ public class Order {
     private List<OrderObserver> observers = new ArrayList<>();
 
     public Order(int id) {
-        // Constructor code
+        this.id = id;
     }
 
     public void addItem(double price) {
-        // Method code
+        this.totalCost += price;
+        this.itemCount++;
+        notifyObservers();
     }
 
     public void attach(OrderObserver observer) {
-        // Method code
+        observers.add(observer);
     }
 
     public void detach(OrderObserver observer) {
-        // Method code
+        observers.remove(observer);
     }
 
     private void notifyObservers() {
-        // Method code
+        for (OrderObserver observer : observers) {
+            observer.update(this);
+        }
     }
 
     public int getId() {
@@ -40,6 +44,6 @@ public class Order {
     }
 
     public void setTotalCost(double totalCost) {
-        // Method code
+        this.totalCost = totalCost;
     }
 }
